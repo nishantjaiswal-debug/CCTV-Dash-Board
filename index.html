@@ -19,21 +19,21 @@ body{background:var(--bg);color:var(--text);font-family:var(--head);min-height:1
 header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
 .logo-area{display:flex;align-items:center;gap:12px;}
 .logo-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;}
-h1{font-size:17px;font-weight:700;letter-spacing:-0.3px;color:var(--text);}
+h1{font-size:17px;font-weight:700;color:var(--text);}
 h1 span{color:var(--accent);}
 .hright{display:flex;align-items:center;gap:12px;}
-.live-badge{display:flex;align-items:center;gap:6px;background:#dcfce7;border:1px solid #bbf7d0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green);}
+.live-badge{display:flex;align-items:center;gap:6px;background:#dcfce7;border:1px solid #bbf7d0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;color:var(--green);}
 .pdot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .lupdate{font-family:var(--mono);font-size:11px;color:var(--text3);}
-.rbtn{background:var(--accent);border:none;color:#fff;padding:7px 16px;border-radius:7px;cursor:pointer;font-family:var(--head);font-size:12px;font-weight:600;transition:all 0.15s;box-shadow:0 1px 2px rgba(37,99,235,0.3);}
+.rbtn{background:var(--accent);border:none;color:#fff;padding:7px 16px;border-radius:7px;cursor:pointer;font-family:var(--head);font-size:12px;font-weight:600;transition:all 0.15s;}
 .rbtn:hover{background:#1d4ed8;}
-#ov{position:fixed;inset:0;background:rgba(240,244,248,0.95);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;backdrop-filter:blur(8px);}
+#ov{position:fixed;inset:0;background:rgba(240,244,248,0.96);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;backdrop-filter:blur(8px);}
 .lring{width:48px;height:48px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.ltxt{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
+.ltxt{font-size:14px;font-weight:600;color:var(--text);}
 .lsub{font-size:12px;color:var(--text2);}
-.pwrap{width:260px;height:4px;background:var(--border);border-radius:4px;overflow:hidden;}
+.pwrap{width:280px;height:4px;background:var(--border);border-radius:4px;overflow:hidden;}
 .pbar{height:100%;background:var(--accent);border-radius:4px;transition:width 0.3s;}
 main{padding:24px 32px;max-width:1600px;margin:0 auto;}
 .banner{border-radius:8px;padding:10px 16px;margin-bottom:20px;font-size:12px;display:flex;align-items:center;gap:8px;font-weight:500;}
@@ -44,11 +44,8 @@ main{padding:24px 32px;max-width:1600px;margin:0 auto;}
 .kc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:box-shadow 0.2s;}
 .kc:hover{box-shadow:var(--shadow-md);}
 .kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;}
-.kc.b::before{background:var(--accent);}
-.kc.g::before{background:var(--green);}
-.kc.r::before{background:var(--red);}
-.kc.y::before{background:var(--yellow);}
-.kc.p::before{background:var(--purple);}
+.kc.b::before{background:var(--accent);}.kc.g::before{background:var(--green);}
+.kc.r::before{background:var(--red);}.kc.y::before{background:var(--yellow);}.kc.p::before{background:var(--purple);}
 .klbl{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text2);margin-bottom:8px;}
 .kval{font-family:var(--mono);font-size:32px;font-weight:500;line-height:1;margin-bottom:4px;}
 .kc.b .kval{color:var(--accent);}.kc.g .kval{color:var(--green);}.kc.r .kval{color:var(--red);}.kc.y .kval{color:var(--yellow);}.kc.p .kval{color:var(--purple);}
@@ -65,13 +62,13 @@ main{padding:24px 32px;max-width:1600px;margin:0 auto;}
 .pbc .w{color:var(--green);font-weight:600;}.pbc .n{color:var(--red);font-weight:600;}
 .btr{height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;display:flex;border:1px solid var(--border);}
 .bw{height:100%;background:var(--green);transition:width 1s ease;}
-.bn{height:100%;background:var(--red);}
+.bn2{height:100%;background:var(--red);}
 .dcon{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;}
 .dwrap{position:relative;width:150px;height:150px;margin-bottom:20px;}
 .dwrap svg{transform:rotate(-90deg);}
 .dcen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .dpct{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--accent);line-height:1;}
-.dplbl{font-size:10px;letter-spacing:0.5px;color:var(--text3);text-transform:uppercase;margin-top:2px;}
+.dplbl{font-size:10px;color:var(--text3);text-transform:uppercase;margin-top:2px;}
 .dleg{width:100%;}
 .legr{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;}
 .legr:last-child{border-bottom:none;}
@@ -88,7 +85,7 @@ select.fs{background:var(--bg2);border:1px solid var(--border);border-radius:7px
 select.fs:focus{border-color:var(--accent);}
 .rc{font-size:11px;color:var(--text3);margin-left:auto;font-family:var(--mono);}
 .rc span{color:var(--accent);font-weight:500;}
-.tw{overflow-x:auto;max-height:540px;overflow-y:auto;}
+.tw{overflow-x:auto;max-height:560px;overflow-y:auto;}
 .tw::-webkit-scrollbar{width:5px;height:5px;}
 .tw::-webkit-scrollbar-track{background:var(--bg3);}
 .tw::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
@@ -97,7 +94,7 @@ thead tr{background:var(--bg3);position:sticky;top:0;z-index:10;}
 th{padding:10px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap;}
 td{padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text);white-space:nowrap;}
 tr:hover td{background:#f8fafc;}
-.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.5px;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;}
 .bwk{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;}
 .bnw{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;}
 .buk{background:#f1f5f9;color:var(--text2);border:1px solid var(--border);}
@@ -138,7 +135,7 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-t
     <div class="kc b"><div class="kico">📷</div><div class="klbl">Total Cameras</div><div class="kval" id="kt">—</div><div class="ksub">Across all packages</div></div>
     <div class="kc g"><div class="kico">✅</div><div class="klbl">Working</div><div class="kval" id="kw">—</div><div class="ksub" id="kwp">Operational</div></div>
     <div class="kc r"><div class="kico">⚠️</div><div class="klbl">Not Working</div><div class="kval" id="kn">—</div><div class="ksub" id="knp">Need attention</div></div>
-    <div class="kc y"><div class="kico">🔴</div><div class="klbl">Critical 30d+</div><div class="kval" id="kc">—</div><div class="ksub">Down ≥ 30 days</div></div>
+    <div class="kc y"><div class="kico">🔴</div><div class="klbl">Critical 30d+</div><div class="kval" id="kc2">—</div><div class="ksub">Down ≥ 30 days</div></div>
     <div class="kc p"><div class="kico">📅</div><div class="klbl">Avg Stop Days</div><div class="kval" id="ka">—</div><div class="ksub">Among non-working</div></div>
   </div>
   <div class="crow">
@@ -168,7 +165,7 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-t
       <div class="fr">
         <input type="text" class="sb" id="search" placeholder="Search tower, IP, location..." oninput="render()">
         <select class="fs" id="fp" onchange="render()"><option value="">All Packages</option></select>
-        <select class="fs" id="fs2" onchange="render()">
+        <select class="fs" id="fst" onchange="render()">
           <option value="">All Status</option>
           <option value="Working">Working</option>
           <option value="Not Working">Not Working</option>
@@ -189,7 +186,7 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-t
           <th>Camera IP</th><th>Location</th><th>Status</th>
           <th>Stop Days</th><th>Rec Days</th><th>Report Date</th><th>Remarks</th>
         </tr></thead>
-        <tbody id="tbody"><tr><td colspan="12" class="nd">Loading data...</td></tr></tbody>
+        <tbody id="tbody"><tr><td colspan="12" class="nd">Loading data from Google Sheets...</td></tr></tbody>
       </table>
       <div class="nd" id="nd" style="display:none">No cameras match the filters.</div>
     </div>
@@ -198,113 +195,117 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-t
 <footer>CCTV Surveillance Dashboard &nbsp;·&nbsp; <span id="ftime"></span></footer>
 
 <script>
-const SHEET_ID = '1lNb8giy84KIwyNKLJh_fkrmgJdh_iYOwwd-XGFEkgHM';
-const SHEETS  = [{"gid": "0", "name": "Type 2 & 3"}, {"gid": "581820122", "name": "Type 4"}, {"gid": "1114024540", "name": "Type 5"}, {"gid": "1960532849", "name": "Type 6 & 7"}];
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2AV8dZMYo4ACPZyDKegFMrJNZkbSnBf9NBxFOm1Konac5foGp_XwADFOWFL1S5rviPw/exec';
+const SHEETS = [{"gid": "0", "name": "Type 2 & 3"}, {"gid": "581820122", "name": "Type 4"}, {"gid": "1114024540", "name": "Type 5"}, {"gid": "1960532849", "name": "Type 6 & 7"}];
 let allCameras = [];
 
 async function loadData() {
   document.getElementById('ov').style.display = 'flex';
   prog(5, 'Fetching Live Data...', 'Connecting to Google Sheets');
-  const cameras = []; let live = false;
+  const cameras = [];
+  let live = false;
+
   for (let i = 0; i < SHEETS.length; i++) {
     const s = SHEETS[i];
-    prog(10 + (i / SHEETS.length) * 75, `Loading ${s.name}...`, `Sheet ${i+1} of ${SHEETS.length}`);
-    try { const rows = await fetchCSV(s.gid, s.name); cameras.push(...rows); live = true; }
-    catch(e) { console.warn('Failed', s.name, e.message); }
+    prog(10 + (i / SHEETS.length) * 78, `Loading ${s.name}...`, `Sheet ${i+1} of ${SHEETS.length}`);
+    try {
+      const url = `${SCRIPT_URL}?gid=${s.gid}`;
+      const r = await fetch(url, {signal: AbortSignal.timeout(15000)});
+      const rows = await r.json();
+      const parsed = parseRows(rows, s.name);
+      cameras.push(...parsed);
+      live = true;
+      console.log(`${s.name}: ${parsed.length} cameras`);
+    } catch(e) {
+      console.warn('Failed to load', s.name, e.message);
+    }
   }
+
   prog(95, 'Building Dashboard...', '');
   allCameras = cameras;
   buildAll();
   document.getElementById('ov').style.display = 'none';
+
   const now = new Date();
   document.getElementById('lu').textContent = 'Updated: ' + now.toLocaleTimeString();
   document.getElementById('ftime').textContent = 'Last refresh: ' + now.toLocaleString();
+
   const banner = document.getElementById('banner');
   const bt = document.getElementById('bt');
   if (live && cameras.length > 0) {
     banner.className = 'banner live';
-    bt.innerHTML = '✅ Live data from <strong>Google Sheets</strong> — ' + cameras.length + ' cameras · Auto-refreshes every 5 min';
+    bt.innerHTML = '✅ Live data from <strong>Google Sheets</strong> — ' + cameras.length + ' cameras loaded · Auto-refreshes every 5 min';
   } else {
     banner.className = 'banner err';
-    bt.innerHTML = '❌ Could not load from Google Sheets. <a href="#" onclick="loadData();return false;" style="color:inherit">Retry</a>';
+    bt.innerHTML = '❌ Could not load from Google Sheets. <a href="#" onclick="loadData();return false;" style="color:inherit;text-decoration:underline">Retry</a>';
   }
 }
 
-async function fetchCSV(gid, name) {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
-  const proxies = [
-    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-    `https://corsproxy.io/?${encodeURIComponent(url)}`
-  ];
-  for (const proxy of proxies) {
-    try {
-      const r = await fetch(proxy, {signal: AbortSignal.timeout(12000)});
-      let t = await r.text();
-      if (proxy.includes('allorigins')) { try { t = JSON.parse(t).contents; } catch(e){} }
-      if (t && t.length > 100 && !t.trim().startsWith('<')) return parseRows(t, name);
-    } catch(e) {}
-  }
-  // Direct
-  const r = await fetch(url, {signal: AbortSignal.timeout(10000)});
-  const t = await r.text();
-  if (t.trim().startsWith('<')) throw new Error('Not public');
-  return parseRows(t, name);
-}
+function parseRows(rows, sheetName) {
+  // rows is a 2D array from Apps Script: [[row1col1, row1col2, ...], [row2col1, ...], ...]
+  if (!rows || rows.length < 3) return [];
 
-function parseRows(csv, sheetName) {
-  const lines = csv.replace(/\r/g, '').split('\n');
-  if (lines.length < 3) return [];
+  // Find header row index (contains "Camera IP" or similar)
   let dataStart = 2;
-  for (let i = 0; i < Math.min(5, lines.length); i++) {
-    const cols = splitCSV(lines[i]).map(c => c.toLowerCase().trim());
-    if (cols.some(c => c.includes('camera ip') || c.includes('cameras ip') || c === 'cam-i.p' || c === 'camera ip')) {
-      dataStart = i + 1; break;
+  for (let i = 0; i < Math.min(5, rows.length); i++) {
+    const cols = rows[i].map(c => String(c).toLowerCase().trim());
+    if (cols.some(c => c.includes('camera ip') || c.includes('cameras ip') || c === 'cam-i.p')) {
+      dataStart = i + 1;
+      break;
     }
   }
+
   const out = [];
-  for (let i = dataStart; i < lines.length; i++) {
-    const c = splitCSV(lines[i]);
-    if (c.length < 5) continue;
-    const g = idx => (idx < c.length ? (c[idx] || '').trim() : '');
+  for (let i = dataStart; i < rows.length; i++) {
+    const row = rows[i];
+    const g = idx => (idx < row.length ? String(row[idx] || '').trim() : '');
+
     const camIp = g(4);
-    if (!camIp || camIp.split('.').length !== 4 || !camIp.split('.').every(p => /^\d+$/.test(p))) continue;
+    // Validate IP address
+    if (!camIp || camIp.split('.').length !== 4 || !camIp.split('.').every(p => /^\d+$/.test(p.trim()))) continue;
+
+    const typeVal = g(1);
     const sr = g(6).toLowerCase();
     const status = sr.includes('not') || sr === 'n/w' || sr === 'nw' ? 'Not Working'
-                 : sr === 'working' || sr === 'w' || sr === 'ok' ? 'Working' : 'Working';
+                 : sr === 'working' || sr === 'w' || sr === 'ok' ? 'Working'
+                 : 'Working'; // default working if blank (IP inventory sheets)
+
+    const stopD = parseInt(g(7)) || 0;
+    const recD  = parseInt(g(8)) || 0;
+
     out.push({
-      package: sheetName, type: g(1), tower: g(2), nvrIp: g(3), camIp,
-      location: g(5), status,
-      stopDays: parseInt(g(7)) || 0, recDays: parseInt(g(8)) || 0,
-      date: g(9), remarks: g(12) || g(11) || '',
+      package: sheetName,
+      type: typeVal,
+      tower: g(2),
+      nvrIp: g(3),
+      camIp,
+      location: g(5),
+      status,
+      stopDays: stopD,
+      recDays: recD,
+      date: g(9),
+      remarks: g(12) || g(11) || '',
     });
   }
   return out;
 }
 
-function splitCSV(line) {
-  const r = []; let c = '', q = false;
-  for (let i = 0; i < line.length; i++) {
-    if (line[i] === '"') { q = !q; }
-    else if (line[i] === ',' && !q) { r.push(c); c = ''; }
-    else { c += line[i]; }
-  }
-  r.push(c); return r;
-}
-
 function buildAll() {
   const total = allCameras.length;
-  const w  = allCameras.filter(c => c.status === 'Working').length;
-  const nw = allCameras.filter(c => c.status === 'Not Working').length;
-  const cr = allCameras.filter(c => c.stopDays >= 30 && c.status === 'Not Working').length;
+  const w   = allCameras.filter(c => c.status === 'Working').length;
+  const nw  = allCameras.filter(c => c.status === 'Not Working').length;
+  const cr  = allCameras.filter(c => c.stopDays >= 30 && c.status === 'Not Working').length;
   const nwA = allCameras.filter(c => c.stopDays > 0 && c.status === 'Not Working');
-  const avg = nwA.length ? Math.round(nwA.reduce((s,c) => s+c.stopDays, 0) / nwA.length) : 0;
+  const avg = nwA.length ? Math.round(nwA.reduce((s,c) => s + c.stopDays, 0) / nwA.length) : 0;
   const pct = total ? Math.round(w / total * 100) : 0;
-  anim('kt', total); anim('kw', w); anim('kn', nw); anim('kc', cr); anim('ka', avg);
+
+  anim('kt', total); anim('kw', w); anim('kn', nw); anim('kc2', cr); anim('ka', avg);
   document.getElementById('kwp').textContent = pct + '% operational';
-  document.getElementById('knp').textContent = (100-pct) + '% need attention';
+  document.getElementById('knp').textContent = (100 - pct) + '% need attention';
+
   const circ = 2 * Math.PI * 55;
-  const wD = (w / (total||1) * circ).toFixed(1);
-  const nD = (nw / (total||1) * circ).toFixed(1);
+  const wD = (w / (total || 1) * circ).toFixed(1);
+  const nD = (nw / (total || 1) * circ).toFixed(1);
   document.getElementById('dw').style.strokeDasharray = `${wD} ${circ}`;
   document.getElementById('dn').style.strokeDasharray = `${nD} ${circ}`;
   document.getElementById('dn').style.strokeDashoffset = -wD;
@@ -312,32 +313,40 @@ function buildAll() {
   document.getElementById('lw').textContent = w;
   document.getElementById('ln').textContent = nw;
   document.getElementById('lc').textContent = cr;
+
+  // Package bars
   const pkgs = {};
   allCameras.forEach(c => {
-    const k = c.package;
-    if (!pkgs[k]) pkgs[k] = {w:0,n:0,t:0};
-    pkgs[k].t++;
-    if (c.status === 'Working') pkgs[k].w++; else pkgs[k].n++;
+    if (!pkgs[c.package]) pkgs[c.package] = {w:0,n:0,t:0};
+    pkgs[c.package].t++;
+    if (c.status === 'Working') pkgs[c.package].w++; else pkgs[c.package].n++;
   });
-  document.getElementById('pbars').innerHTML = Object.entries(pkgs).map(([name,p]) => {
+  document.getElementById('pbars').innerHTML = Object.entries(pkgs).map(([name, p]) => {
     const wp = Math.round(p.w / p.t * 100);
     return `<div class="pbrow">
-      <div class="pbhd"><span class="pbn">${name}</span><span class="pbc"><span class="w">${p.w} working</span> &nbsp;/&nbsp; <span class="n">${p.n} not working</span> &nbsp;/&nbsp; ${p.t} total</span></div>
-      <div class="btr"><div class="bw" style="width:${wp}%"></div><div class="bn" style="width:${100-wp}%"></div></div>
+      <div class="pbhd">
+        <span class="pbn">${name}</span>
+        <span class="pbc"><span class="w">${p.w} working</span> &nbsp;/&nbsp; <span class="n">${p.n} not working</span> &nbsp;/&nbsp; ${p.t} total</span>
+      </div>
+      <div class="btr"><div class="bw" style="width:${wp}%"></div><div class="bn2" style="width:${100-wp}%"></div></div>
     </div>`;
-  }).join('') || '<div class="nd">No data loaded yet.</div>';
+  }).join('') || '<div class="nd">No data loaded.</div>';
+
+  // Update package filter dropdown
   const sel = document.getElementById('fp');
   const prev = sel.value;
   sel.innerHTML = '<option value="">All Packages</option>' + Object.keys(pkgs).map(p => `<option value="${p}">${p}</option>`).join('');
   sel.value = prev;
+
   render();
 }
 
 function render() {
   const s  = document.getElementById('search').value.toLowerCase();
   const p  = document.getElementById('fp').value;
-  const st = document.getElementById('fs2').value;
+  const st = document.getElementById('fst').value;
   const cr = parseInt(document.getElementById('fc').value) || 0;
+
   const f = allCameras.filter(c => {
     if (p  && c.package !== p) return false;
     if (st && c.status !== st) return false;
@@ -345,10 +354,16 @@ function render() {
     if (s  && !`${c.tower} ${c.camIp} ${c.nvrIp} ${c.location} ${c.remarks}`.toLowerCase().includes(s)) return false;
     return true;
   });
+
   document.getElementById('rcount').textContent = f.length;
   const nd = document.getElementById('nd');
-  if (!f.length) { document.getElementById('tbody').innerHTML = ''; nd.style.display = 'block'; return; }
+  if (!f.length) {
+    document.getElementById('tbody').innerHTML = '';
+    nd.style.display = 'block';
+    return;
+  }
   nd.style.display = 'none';
+
   document.getElementById('tbody').innerHTML = f.map((c, i) => {
     const bc = c.status === 'Working' ? 'bwk' : c.status === 'Not Working' ? 'bnw' : 'buk';
     const sc = c.stopDays >= 100 ? 'sc' : c.stopDays >= 30 ? 'sw' : '';
@@ -373,9 +388,14 @@ function anim(id, target) {
   const el = document.getElementById(id);
   const s = parseInt(el.textContent) || 0;
   const t0 = performance.now();
-  const tick = now => { const p = Math.min(1,(now-t0)/600); el.textContent = Math.round(s+(target-s)*p); if(p<1) requestAnimationFrame(tick); };
+  const tick = now => {
+    const p = Math.min(1, (now - t0) / 600);
+    el.textContent = Math.round(s + (target - s) * p);
+    if (p < 1) requestAnimationFrame(tick);
+  };
   requestAnimationFrame(tick);
 }
+
 function prog(pct, main, sub) {
   document.getElementById('pb').style.width = pct + '%';
   if (main) document.getElementById('lt').textContent = main;
