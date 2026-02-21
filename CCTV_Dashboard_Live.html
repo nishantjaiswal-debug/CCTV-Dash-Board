@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCTV Surveillance Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f4f8;--bg2:#ffffff;--bg3:#f7fafc;--border:#e2e8f0;
+  --accent:#2563eb;--green:#16a34a;--red:#dc2626;--yellow:#d97706;--purple:#7c3aed;
+  --text:#1e293b;--text2:#64748b;--text3:#94a3b8;
+  --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,0.08),0 2px 4px -2px rgba(0,0,0,0.04);
+  --mono:'JetBrains Mono',monospace;--head:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--head);min-height:100vh;}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+h1{font-size:17px;font-weight:700;letter-spacing:-0.3px;color:var(--text);}
+h1 span{color:var(--accent);}
+.hright{display:flex;align-items:center;gap:12px;}
+.live-badge{display:flex;align-items:center;gap:6px;background:#dcfce7;border:1px solid #bbf7d0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:0.5px;color:var(--green);}
+.pdot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.lupdate{font-family:var(--mono);font-size:11px;color:var(--text3);}
+.rbtn{background:var(--accent);border:none;color:#fff;padding:7px 16px;border-radius:7px;cursor:pointer;font-family:var(--head);font-size:12px;font-weight:600;transition:all 0.15s;box-shadow:0 1px 2px rgba(37,99,235,0.3);}
+.rbtn:hover{background:#1d4ed8;}
+#ov{position:fixed;inset:0;background:rgba(240,244,248,0.95);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;backdrop-filter:blur(8px);}
+.lring{width:48px;height:48px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ltxt{font-size:14px;font-weight:600;color:var(--text);letter-spacing:0.5px;}
+.lsub{font-size:12px;color:var(--text2);}
+.pwrap{width:260px;height:4px;background:var(--border);border-radius:4px;overflow:hidden;}
+.pbar{height:100%;background:var(--accent);border-radius:4px;transition:width 0.3s;}
+main{padding:24px 32px;max-width:1600px;margin:0 auto;}
+.banner{border-radius:8px;padding:10px 16px;margin-bottom:20px;font-size:12px;display:flex;align-items:center;gap:8px;font-weight:500;}
+.banner.live{background:#f0fdf4;border:1px solid #bbf7d0;color:var(--green);}
+.banner.cached{background:#fffbeb;border:1px solid #fde68a;color:var(--yellow);}
+.banner.err{background:#fef2f2;border:1px solid #fecaca;color:var(--red);}
+.kgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:20px;}
+.kc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:box-shadow 0.2s;}
+.kc:hover{box-shadow:var(--shadow-md);}
+.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;}
+.kc.b::before{background:var(--accent);}
+.kc.g::before{background:var(--green);}
+.kc.r::before{background:var(--red);}
+.kc.y::before{background:var(--yellow);}
+.kc.p::before{background:var(--purple);}
+.klbl{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text2);margin-bottom:8px;}
+.kval{font-family:var(--mono);font-size:32px;font-weight:500;line-height:1;margin-bottom:4px;}
+.kc.b .kval{color:var(--accent);}.kc.g .kval{color:var(--green);}.kc.r .kval{color:var(--red);}.kc.y .kval{color:var(--yellow);}.kc.p .kval{color:var(--purple);}
+.ksub{font-size:11px;color:var(--text3);}
+.kico{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:32px;opacity:0.07;}
+.crow{display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:20px;}
+.cc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:var(--shadow);}
+.ct{font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--text2);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.ct::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;}
+.pbrow{margin-bottom:14px;}
+.pbhd{display:flex;justify-content:space-between;margin-bottom:5px;}
+.pbn{font-size:12px;font-weight:500;color:var(--text);}
+.pbc{font-size:11px;color:var(--text2);}
+.pbc .w{color:var(--green);font-weight:600;}.pbc .n{color:var(--red);font-weight:600;}
+.btr{height:7px;background:var(--bg3);border-radius:4px;overflow:hidden;display:flex;border:1px solid var(--border);}
+.bw{height:100%;background:var(--green);transition:width 1s ease;}
+.bn{height:100%;background:var(--red);}
+.dcon{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;}
+.dwrap{position:relative;width:150px;height:150px;margin-bottom:20px;}
+.dwrap svg{transform:rotate(-90deg);}
+.dcen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.dpct{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--accent);line-height:1;}
+.dplbl{font-size:10px;letter-spacing:0.5px;color:var(--text3);text-transform:uppercase;margin-top:2px;}
+.dleg{width:100%;}
+.legr{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.legr:last-child{border-bottom:none;}
+.legd{width:8px;height:8px;border-radius:50%;margin-right:8px;}
+.legl{display:flex;align-items:center;color:var(--text2);}
+.legv{font-family:var(--mono);font-size:13px;font-weight:500;}
+.tc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+.th{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:var(--bg3);}
+.fr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.sb{background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 12px;color:var(--text);font-family:var(--mono);font-size:12px;width:220px;outline:none;transition:border-color 0.15s;}
+.sb:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.08);}
+.sb::placeholder{color:var(--text3);}
+select.fs{background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px 10px;color:var(--text);font-family:var(--head);font-size:12px;font-weight:500;outline:none;cursor:pointer;}
+select.fs:focus{border-color:var(--accent);}
+.rc{font-size:11px;color:var(--text3);margin-left:auto;font-family:var(--mono);}
+.rc span{color:var(--accent);font-weight:500;}
+.tw{overflow-x:auto;max-height:540px;overflow-y:auto;}
+.tw::-webkit-scrollbar{width:5px;height:5px;}
+.tw::-webkit-scrollbar-track{background:var(--bg3);}
+.tw::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead tr{background:var(--bg3);position:sticky;top:0;z-index:10;}
+th{padding:10px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text);white-space:nowrap;}
+tr:hover td{background:#f8fafc;}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.5px;}
+.bwk{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;}
+.bnw{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;}
+.buk{background:#f1f5f9;color:var(--text2);border:1px solid var(--border);}
+.sw{color:var(--yellow);font-weight:600;}.sc{color:var(--red);font-weight:700;}
+.ptag{display:inline-block;padding:2px 8px;border-radius:4px;background:#eff6ff;color:var(--accent);border:1px solid #bfdbfe;font-size:10px;font-weight:600;}
+.nd{text-align:center;padding:48px;color:var(--text3);font-size:13px;}
+footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:20px;}
+@media(max-width:1100px){.kgrid{grid-template-columns:repeat(3,1fr);}.crow{grid-template-columns:1fr;}}
+@media(max-width:700px){main{padding:16px;}.kgrid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div id="ov">
+  <div class="lring"></div>
+  <div class="ltxt" id="lt">Fetching Live Data...</div>
+  <div class="lsub" id="ls">Connecting to Google Sheets</div>
+  <div class="pwrap"><div class="pbar" id="pb" style="width:0%"></div></div>
+</div>
+<header>
+  <div class="logo-area">
+    <div class="logo-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+        <circle cx="12" cy="8" r="4"/><path d="M12 12v8M8 20h8"/>
+        <circle cx="12" cy="8" r="8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+    <h1>CCTV <span>Surveillance</span> Dashboard</h1>
+  </div>
+  <div class="hright">
+    <div class="lupdate" id="lu">—</div>
+    <button class="rbtn" onclick="loadData()">↻ Refresh</button>
+    <div class="live-badge"><div class="pdot"></div>Live</div>
+  </div>
+</header>
+<main>
+  <div class="banner cached" id="banner"><span id="bt">Loading data from Google Sheets...</span></div>
+  <div class="kgrid">
+    <div class="kc b"><div class="kico">📷</div><div class="klbl">Total Cameras</div><div class="kval" id="kt">—</div><div class="ksub">Across all packages</div></div>
+    <div class="kc g"><div class="kico">✅</div><div class="klbl">Working</div><div class="kval" id="kw">—</div><div class="ksub" id="kwp">Operational</div></div>
+    <div class="kc r"><div class="kico">⚠️</div><div class="klbl">Not Working</div><div class="kval" id="kn">—</div><div class="ksub" id="knp">Need attention</div></div>
+    <div class="kc y"><div class="kico">🔴</div><div class="klbl">Critical 30d+</div><div class="kval" id="kc">—</div><div class="ksub">Down ≥ 30 days</div></div>
+    <div class="kc p"><div class="kico">📅</div><div class="klbl">Avg Stop Days</div><div class="kval" id="ka">—</div><div class="ksub">Among non-working</div></div>
+  </div>
+  <div class="crow">
+    <div class="cc"><div class="ct">Package-wise Status Breakdown</div><div id="pbars"><div class="nd">Loading...</div></div></div>
+    <div class="cc">
+      <div class="ct">Overall Health</div>
+      <div class="dcon">
+        <div class="dwrap">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="55" fill="none" stroke="#e2e8f0" stroke-width="18"/>
+            <circle id="dw" cx="75" cy="75" r="55" fill="none" stroke="#16a34a" stroke-width="18" stroke-dasharray="0 345" stroke-linecap="round"/>
+            <circle id="dn" cx="75" cy="75" r="55" fill="none" stroke="#dc2626" stroke-width="18" stroke-dasharray="0 345" stroke-linecap="round"/>
+          </svg>
+          <div class="dcen"><div class="dpct" id="dp">—</div><div class="dplbl">Operational</div></div>
+        </div>
+        <div class="dleg">
+          <div class="legr"><div class="legl"><div class="legd" style="background:var(--green)"></div>Working</div><div class="legv" id="lw" style="color:var(--green)">—</div></div>
+          <div class="legr"><div class="legl"><div class="legd" style="background:var(--red)"></div>Not Working</div><div class="legv" id="ln" style="color:var(--red)">—</div></div>
+          <div class="legr"><div class="legl"><div class="legd" style="background:var(--yellow)"></div>Critical 30d+</div><div class="legv" id="lc" style="color:var(--yellow)">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc">
+    <div class="th">
+      <div class="ct" style="margin-bottom:0">Camera Details</div>
+      <div class="fr">
+        <input type="text" class="sb" id="search" placeholder="Search tower, IP, location..." oninput="render()">
+        <select class="fs" id="fp" onchange="render()"><option value="">All Packages</option></select>
+        <select class="fs" id="fs2" onchange="render()">
+          <option value="">All Status</option>
+          <option value="Working">Working</option>
+          <option value="Not Working">Not Working</option>
+        </select>
+        <select class="fs" id="fc" onchange="render()">
+          <option value="">All Cameras</option>
+          <option value="30">Critical 30d+</option>
+          <option value="60">Critical 60d+</option>
+          <option value="100">Critical 100d+</option>
+        </select>
+        <div class="rc">Showing <span id="rcount">0</span> cameras</div>
+      </div>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Package</th><th>Type</th><th>Tower</th><th>NVR IP</th>
+          <th>Camera IP</th><th>Location</th><th>Status</th>
+          <th>Stop Days</th><th>Rec Days</th><th>Report Date</th><th>Remarks</th>
+        </tr></thead>
+        <tbody id="tbody"><tr><td colspan="12" class="nd">Loading data...</td></tr></tbody>
+      </table>
+      <div class="nd" id="nd" style="display:none">No cameras match the filters.</div>
+    </div>
+  </div>
+</main>
+<footer>CCTV Surveillance Dashboard &nbsp;·&nbsp; <span id="ftime"></span></footer>
+
+<script>
+const SHEET_ID = '1lNb8giy84KIwyNKLJh_fkrmgJdh_iYOwwd-XGFEkgHM';
+const SHEETS  = [{"gid": "0", "name": "Type 2 & 3"}, {"gid": "581820122", "name": "Type 4"}, {"gid": "1114024540", "name": "Type 5"}, {"gid": "1960532849", "name": "Type 6 & 7"}];
+let allCameras = [];
+
+async function loadData() {
+  document.getElementById('ov').style.display = 'flex';
+  prog(5, 'Fetching Live Data...', 'Connecting to Google Sheets');
+  const cameras = []; let live = false;
+  for (let i = 0; i < SHEETS.length; i++) {
+    const s = SHEETS[i];
+    prog(10 + (i / SHEETS.length) * 75, `Loading ${s.name}...`, `Sheet ${i+1} of ${SHEETS.length}`);
+    try { const rows = await fetchCSV(s.gid, s.name); cameras.push(...rows); live = true; }
+    catch(e) { console.warn('Failed', s.name, e.message); }
+  }
+  prog(95, 'Building Dashboard...', '');
+  allCameras = cameras;
+  buildAll();
+  document.getElementById('ov').style.display = 'none';
+  const now = new Date();
+  document.getElementById('lu').textContent = 'Updated: ' + now.toLocaleTimeString();
+  document.getElementById('ftime').textContent = 'Last refresh: ' + now.toLocaleString();
+  const banner = document.getElementById('banner');
+  const bt = document.getElementById('bt');
+  if (live && cameras.length > 0) {
+    banner.className = 'banner live';
+    bt.innerHTML = '✅ Live data from <strong>Google Sheets</strong> — ' + cameras.length + ' cameras · Auto-refreshes every 5 min';
+  } else {
+    banner.className = 'banner err';
+    bt.innerHTML = '❌ Could not load from Google Sheets. <a href="#" onclick="loadData();return false;" style="color:inherit">Retry</a>';
+  }
+}
+
+async function fetchCSV(gid, name) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    `https://corsproxy.io/?${encodeURIComponent(url)}`
+  ];
+  for (const proxy of proxies) {
+    try {
+      const r = await fetch(proxy, {signal: AbortSignal.timeout(12000)});
+      let t = await r.text();
+      if (proxy.includes('allorigins')) { try { t = JSON.parse(t).contents; } catch(e){} }
+      if (t && t.length > 100 && !t.trim().startsWith('<')) return parseRows(t, name);
+    } catch(e) {}
+  }
+  // Direct
+  const r = await fetch(url, {signal: AbortSignal.timeout(10000)});
+  const t = await r.text();
+  if (t.trim().startsWith('<')) throw new Error('Not public');
+  return parseRows(t, name);
+}
+
+function parseRows(csv, sheetName) {
+  const lines = csv.replace(/\r/g, '').split('\n');
+  if (lines.length < 3) return [];
+  let dataStart = 2;
+  for (let i = 0; i < Math.min(5, lines.length); i++) {
+    const cols = splitCSV(lines[i]).map(c => c.toLowerCase().trim());
+    if (cols.some(c => c.includes('camera ip') || c.includes('cameras ip') || c === 'cam-i.p' || c === 'camera ip')) {
+      dataStart = i + 1; break;
+    }
+  }
+  const out = [];
+  for (let i = dataStart; i < lines.length; i++) {
+    const c = splitCSV(lines[i]);
+    if (c.length < 5) continue;
+    const g = idx => (idx < c.length ? (c[idx] || '').trim() : '');
+    const camIp = g(4);
+    if (!camIp || camIp.split('.').length !== 4 || !camIp.split('.').every(p => /^\d+$/.test(p))) continue;
+    const sr = g(6).toLowerCase();
+    const status = sr.includes('not') || sr === 'n/w' || sr === 'nw' ? 'Not Working'
+                 : sr === 'working' || sr === 'w' || sr === 'ok' ? 'Working' : 'Working';
+    out.push({
+      package: sheetName, type: g(1), tower: g(2), nvrIp: g(3), camIp,
+      location: g(5), status,
+      stopDays: parseInt(g(7)) || 0, recDays: parseInt(g(8)) || 0,
+      date: g(9), remarks: g(12) || g(11) || '',
+    });
+  }
+  return out;
+}
+
+function splitCSV(line) {
+  const r = []; let c = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === '"') { q = !q; }
+    else if (line[i] === ',' && !q) { r.push(c); c = ''; }
+    else { c += line[i]; }
+  }
+  r.push(c); return r;
+}
+
+function buildAll() {
+  const total = allCameras.length;
+  const w  = allCameras.filter(c => c.status === 'Working').length;
+  const nw = allCameras.filter(c => c.status === 'Not Working').length;
+  const cr = allCameras.filter(c => c.stopDays >= 30 && c.status === 'Not Working').length;
+  const nwA = allCameras.filter(c => c.stopDays > 0 && c.status === 'Not Working');
+  const avg = nwA.length ? Math.round(nwA.reduce((s,c) => s+c.stopDays, 0) / nwA.length) : 0;
+  const pct = total ? Math.round(w / total * 100) : 0;
+  anim('kt', total); anim('kw', w); anim('kn', nw); anim('kc', cr); anim('ka', avg);
+  document.getElementById('kwp').textContent = pct + '% operational';
+  document.getElementById('knp').textContent = (100-pct) + '% need attention';
+  const circ = 2 * Math.PI * 55;
+  const wD = (w / (total||1) * circ).toFixed(1);
+  const nD = (nw / (total||1) * circ).toFixed(1);
+  document.getElementById('dw').style.strokeDasharray = `${wD} ${circ}`;
+  document.getElementById('dn').style.strokeDasharray = `${nD} ${circ}`;
+  document.getElementById('dn').style.strokeDashoffset = -wD;
+  document.getElementById('dp').textContent = pct + '%';
+  document.getElementById('lw').textContent = w;
+  document.getElementById('ln').textContent = nw;
+  document.getElementById('lc').textContent = cr;
+  const pkgs = {};
+  allCameras.forEach(c => {
+    const k = c.package;
+    if (!pkgs[k]) pkgs[k] = {w:0,n:0,t:0};
+    pkgs[k].t++;
+    if (c.status === 'Working') pkgs[k].w++; else pkgs[k].n++;
+  });
+  document.getElementById('pbars').innerHTML = Object.entries(pkgs).map(([name,p]) => {
+    const wp = Math.round(p.w / p.t * 100);
+    return `<div class="pbrow">
+      <div class="pbhd"><span class="pbn">${name}</span><span class="pbc"><span class="w">${p.w} working</span> &nbsp;/&nbsp; <span class="n">${p.n} not working</span> &nbsp;/&nbsp; ${p.t} total</span></div>
+      <div class="btr"><div class="bw" style="width:${wp}%"></div><div class="bn" style="width:${100-wp}%"></div></div>
+    </div>`;
+  }).join('') || '<div class="nd">No data loaded yet.</div>';
+  const sel = document.getElementById('fp');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">All Packages</option>' + Object.keys(pkgs).map(p => `<option value="${p}">${p}</option>`).join('');
+  sel.value = prev;
+  render();
+}
+
+function render() {
+  const s  = document.getElementById('search').value.toLowerCase();
+  const p  = document.getElementById('fp').value;
+  const st = document.getElementById('fs2').value;
+  const cr = parseInt(document.getElementById('fc').value) || 0;
+  const f = allCameras.filter(c => {
+    if (p  && c.package !== p) return false;
+    if (st && c.status !== st) return false;
+    if (cr && c.stopDays < cr) return false;
+    if (s  && !`${c.tower} ${c.camIp} ${c.nvrIp} ${c.location} ${c.remarks}`.toLowerCase().includes(s)) return false;
+    return true;
+  });
+  document.getElementById('rcount').textContent = f.length;
+  const nd = document.getElementById('nd');
+  if (!f.length) { document.getElementById('tbody').innerHTML = ''; nd.style.display = 'block'; return; }
+  nd.style.display = 'none';
+  document.getElementById('tbody').innerHTML = f.map((c, i) => {
+    const bc = c.status === 'Working' ? 'bwk' : c.status === 'Not Working' ? 'bnw' : 'buk';
+    const sc = c.stopDays >= 100 ? 'sc' : c.stopDays >= 30 ? 'sw' : '';
+    return `<tr>
+      <td>${i+1}</td>
+      <td><span class="ptag">${c.package||'—'}</span></td>
+      <td>${c.type||'—'}</td>
+      <td>${c.tower||'—'}</td>
+      <td>${c.nvrIp||'—'}</td>
+      <td>${c.camIp}</td>
+      <td>${c.location||'—'}</td>
+      <td><span class="badge ${bc}">${c.status}</span></td>
+      <td class="${sc}">${c.stopDays||'—'}</td>
+      <td>${c.recDays||'—'}</td>
+      <td>${c.date||'—'}</td>
+      <td>${c.remarks||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function anim(id, target) {
+  const el = document.getElementById(id);
+  const s = parseInt(el.textContent) || 0;
+  const t0 = performance.now();
+  const tick = now => { const p = Math.min(1,(now-t0)/600); el.textContent = Math.round(s+(target-s)*p); if(p<1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+function prog(pct, main, sub) {
+  document.getElementById('pb').style.width = pct + '%';
+  if (main) document.getElementById('lt').textContent = main;
+  if (sub !== undefined) document.getElementById('ls').textContent = sub;
+}
+
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
